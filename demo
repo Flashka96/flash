@@ -1,0 +1,10 @@
+2 задание на hq-srv
+#mdadm --create /dev/md0 –l 0 –n 2 /dev/sdb /dev/sdc
+#mdadm --detail --scan --verbose | tee -a /etc/mdadm.conf
+#mkfs.ext4 /dev/md0
+#Редакируем файл /etc/fstab, прописывае следущее: /dev/md0    /raid    ext4    defaults    0    0
+#mkdir /raid
+#mount -av
+# проверка lsblk
+
+3 задание 
