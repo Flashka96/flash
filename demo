@@ -8,3 +8,39 @@
 # проверка lsblk
 
 3 задание 
+#apt-get install nfs-server -y
+#mkdir /raid/nfs
+#chmod -R 777 /raid/nfs
+#Открываем файл /etc/exports и пишем в нем:
+#/raid/nfs 192.168.200.0/28(rw)
+#exportfs -arv
+#systemctl enable --now nfs-server
+#Переходим на HQ-CLI
+#Прописываем в терминале
+#mkdir /mnt/nfs
+#chmod -R 777 /mnt/nfs
+#в файл /etc/fstab прописываем в новой строчке
+#192.168.100.2:/raid/nfs /mnt/nfs nfs defaults 0 0
+#df -h
+
+4 задание
+#apt-get install chrony -y
+#переходим в файл /etc/chrony.conf и local stratum 5 и закоментить #pool pool.ntp.org iburst 
+#После чего добавляем строчки: server ntp0.ntp-servers.net iburst prefer minstratum 4 и allow 0.0.0.0/0
+#systemctl restart chronyd
+#прописываем на всех машинах: apt-get update && apt-get install chrony -y
+#редактируем /etc/chrony.conf  и закоментить #pool pool.ntp.org iburst 
+# добавить строку server 172.16.1.1 iburst Для машин BR-RTR BR-SRV сервер будет 172.16.2.1!!!!!
+#systemctl restart chronyd
+# проверка chronyc sources
+
+5 задание 
+#
+#
+#
+#
+#
+#
+#
+#
+#
