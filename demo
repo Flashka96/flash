@@ -1,18 +1,17 @@
-2 задание на hq-srv
+2 zadanie на hq-srv
 #mdadm --create /dev/md0 –l 0 –n 2 /dev/sdb /dev/sdc
 #mdadm --detail --scan --verbose | tee -a /etc/mdadm.conf
 #mkfs.ext4 /dev/md0
-#Редакируем файл /etc/fstab, прописывае следущее: /dev/md0    /raid    ext4    defaults    0    0
+#go to /etc/fstab, pishi: /dev/md0    /raid    ext4    defaults    0    0
 #mkdir /raid
 #mount -av
-# проверка lsblk
+# checkakaem lsblk
 
 3 Zadanie na hq-srv
 #apt-get install nfs-server -y
 #mkdir /raid/nfs
 #chmod -R 777 /raid/nfs
-#Открываем файл /etc/exports и пишем в нем:
-#/raid/nfs 192.168.200.0/28(rw)
+#go to /etc/exports and pishi /raid/nfs 192.168.200.0/28(rw)
 #exportfs -arv
 #systemctl enable --now nfs-server
 #go to HQ-CLI
@@ -20,20 +19,42 @@
 #chmod -R 777 /mnt/nfs
 #v fail /etc/fstab new strochka
 #192.168.100.2:/raid/nfs /mnt/nfs nfs defaults 0 0
+#rebootni tak srabotaet
 #df -h
 
 4 zadanie na isp
 #apt-get install chrony -y
 #go to fail /etc/chrony.conf and local stratum 5 and zakomentit #pool pool.ntp.org iburst 
-#new strochka: server ntp0.ntp-servers.net iburst prefer minstratum 4 and allow 0.0.0.0/0
+#new strochka: server ntp0.ntp-servers.net iburst prefer minstratum 4 and eta nizhe allow 0.0.0.0/0
 #systemctl restart chronyd
 #na vsex mashinax apt-get update && apt-get install chrony -y
 #redachim /etc/chrony.conf  and zakomentit #pool pool.ntp.org iburst 
-# new strochka server 172.16.1.1 iburst dlya mashin BR-RTR BR-SRV servak budet 172.16.2.1!!!!!
+# new strochka server 172.16.1.1 iburst          dlya mashin BR-RTR BR-SRV servak budet 172.16.2.1!!!!!
 #systemctl restart chronyd
 # проверка chronyc sources
 
 5 задание 
+#NA SERVAKE BR-SRV!!!!
+#apt-get update && apt-get install –y ansible sshpass
+#Potom v file /etc/ansible/hosts
+#br-rtr ansible_ssh_host=192.168.1.1 ansible_ssh_user=net_admin ansible_ssh_pass=P@ssword
+#hq-rtr ansible_ssh_host=172.16.1.2 ansible_ssh_user=net_admin ansible_ssh_pass=P@ssword
+#hq-srv ansible_ssh_host=192.168.100.2 ansible_ssh_user=sshuser ansible_ssh_pass=P@ssword ansible_ssh_port=2026
+#hq-cli ansible_ssh_host=192.168.200.2 ansible_ssh_user=Administrator@au-team.irpo ansible_ssh_pass=P@ssword
+#potom idem v /etc/ansible/ansible.cfg
+##host_key_checking = False >> host_key_checking = False karoch typo raskomentit
+# kak proverit? ansible all -m ping 
+# Esli dofua red texta idi i restart na vsex mashunax kotorie ti pisal vishe 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #
 #
 #
