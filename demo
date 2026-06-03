@@ -45,3 +45,6 @@
 ##host_key_checking = False >> host_key_checking = False karoch typo raskomentit
 # kak proverit? ansible all -m ping 
 # Esli dofua red texta idi i restart na vsex mashunax kotorie ti pisal vishe 
+
+11 zadanie 
+#apt-get install yandex-browser
